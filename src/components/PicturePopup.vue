@@ -1,67 +1,107 @@
 <template>
-  <!--https://github.com/mirari/v-viewer 참고 -->
-  <!--https://vuejsexamples.com/responsive-gallery-component-for-vuejs/ 참고-->
-  <div id="app">
-    <img
-      class="image"
-      v-for="(image, i) in images"
-      :src="image"
-      @click="onClick(i)"
-    />
-    <vue-gallery-slideshow
-      :images="images"
-      :index="index"
-      @close="index = null"
-    ></vue-gallery-slideshow>
-  </div>
+  <div class="picture-list">
+      <div
+              v-for="picture in pictures"
+              class="thumbnail">
+        <img :src="picture.image"/>
+        <VueEasyLightbox
+                  :visible="visible"
+                  :imgs="imgs"
+                  :index="index"
+                  @hide="handleHide"
+        ></VueEasyLightbox>
+
+        <div class="thumbnail-info">
+          <p>{{picture.created_At}}</p>
+        </div>
+      </div>
+
+    </div>
 </template>
 
 <script>
-export default {
-  name: "picture-popup"
-};
+    import VueEasyLightbox from 'vue-easy-lightbox'
 
-/*
-    new Vue({
-        el: '#app',
-        components: {
-            VueGallerySlideshow
+  let pictures = [
+    {
+      id: 0,
+      image: "https://placekitten.com/801/800",
+      created_At: "201907120019"
+    },
+    {
+      id: 1,
+      image: "https://placekitten.com/802/800",
+      created_At: "201907120020"
+    },
+    {
+      id: 2,
+      image: "https://placekitten.com/803/800",
+      created_At: "201907120021"
+    },
+
+  ];
+  export default {
+    name: "PicturePopup",
+      components: {
+          VueEasyLightbox
+      },
+
+    data(){
+      return{
+        pictures,
+        imgs: '',  // Img Url , string or Array
+        visible: false,
+        index: 0   // default
+      }
+    },
+      methods:{
+        clickMethod(){
+            VueEasyLightbox.imgs = pictures[id].image
+            VueEasyLightbox.index = pictures[id].id  // index of imgList
+            VueEasyLightbox.show()
         },
-        methods: {
-            onClick(i) {
-                this.index = i;
-            }
+        show() {
+            VueEasyLightbox.visible = true
         },
-        data: {
-            images: [
-                'https://placekitten.com/801/800',
-                'https://placekitten.com/802/800',
-                'https://placekitten.com/803/800',
-                'https://placekitten.com/804/800',
-                'https://placekitten.com/805/800',
-                'https://placekitten.com/806/800',
-                'https://placekitten.com/807/800',
-                'https://placekitten.com/808/800',
-                'https://placekitten.com/809/800',
-                'https://placekitten.com/810/800',
-            ],
-            index: 0
+        handleHide() {
+            VueEasyLightbox.visible = false
         }
-    })
- */
+      }
+  }
+
+
 </script>
 
 <style scoped>
-body {
-  font-family: sans-serif;
-}
+  .thumbnail{
+    display:flex;
+  }
+  .thumbnail img{
+    width:168px;
+  }
 
-.image {
-  width: 100px;
-  height: 100px;
-  background-size: contain;
-  cursor: pointer;
-  margin: 10px;
-  border-radius: 3px;
-}
+  .thumbnail-info{
+    margin-left:20px;
+  }
+
+  .thumbnail h3{
+    font-size:16px;
+  }
+
+  h3,
+  p{
+    margin:0;
+    padding:0;
+  }
+
+  .video-player{
+    display:flex;
+    width:1200px;
+    margin:auto;
+  }
+
+  .video-container{
+    margin-right:40px;
+  }
+
 </style>

@@ -35,7 +35,10 @@ import Vue from 'vue';
 import Gallery from "./components/Gallery.vue";
 import LiveStream from "./components/LiveStream.vue";
 import PicturePopup from "./components/PicturePopup.vue";
+import PicturePopup2 from "./components/PicturePopup.vue";
 import VideoPopup from "./components/VideoPopup.vue";
+import VideoPlayer from "./components/VideoPlayer.vue"
+import VueGallerySlideshow from "vue-gallery-slideshow"
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import ToggleButton from 'vue-js-toggle-button';
@@ -46,18 +49,20 @@ export default {
     Gallery,
     LiveStream,
     PicturePopup,
-    VideoPopup
+    VideoPopup,
+    PicturePopup2
   },
   data() {
     return {
       picture: {
+          id: 1,
         image: "",
         created_At: ""
       },
       video: {
           id: 1,
           thumbnail:"",
-          imageURL: "",
+          videoURL: "",
           created_At: ""
       }
     };
