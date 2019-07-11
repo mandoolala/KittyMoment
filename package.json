@@ -8,7 +8,15 @@
     "@vue/cli-service": "^3.9.0"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.26",
+    "save": "^2.4.0",
     "vue": "^2.6.10",
+    "vue-router": "^3.0.7",
     "vue-template-compiler": "^2.6.10"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
   }
 }

@@ -1,10 +1,11 @@
 <template>
-    
+    <video id="liveStream"controls height="600px"></video>
 </template>
 
 <script>
     export default {
-        name: "live-stream.vue"
+        name: "liveStream",
+
     }
 </script>
 
