@@ -9,6 +9,7 @@
                 <b-tab title="Video">
                     <!-- 여기에 video list -->
                     <b-card-text>Tab Contents 2</b-card-text>
+
                 </b-tab>
             </b-tabs>
         </b-card>
@@ -17,7 +18,7 @@
 
 <script>
     export default {
-        name: "Gallery"
+        name: "Gallery",
     }
 </script>
 

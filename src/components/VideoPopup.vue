@@ -1,17 +1,20 @@
 <template>
     <!-- https://vuejsexamples.com/responsive-gallery-component-for-vuejs/ 참고 -->
+    <!--
+
     <div id="app">
         <img class="image" v-for="(image, i) in images" :src="image" @click="onClick(i)">
         <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
-    </div>
 
+    </div>
+    -->
 </template>
 
 <script>
     export default {
         name: "videoPopup.vue"
     }
-    /*
+/*
     import VueGallerySlideshow from 'vue-gallery-slideshow'
 
 
@@ -41,7 +44,7 @@
             index: 0
         }
     })
-     */
+ */
 </script>
 
 
