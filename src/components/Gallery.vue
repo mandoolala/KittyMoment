@@ -2,10 +2,11 @@
     <div>
         <b-card no-body>
             <b-tabs card>
-                <b-tab title="Tab 1" active>
+                <b-tab title="Picture" active>
+                    <!-- 여기에 picture list -->
                     <b-card-text>Tab Contents 1</b-card-text>
                 </b-tab>
-                <b-tab title="Tab 2">
+                <b-tab title="Video">
                     <!-- 여기에 video list -->
                     <b-card-text>Tab Contents 2</b-card-text>
                 </b-tab>
