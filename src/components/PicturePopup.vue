@@ -1,19 +1,27 @@
 <template>
-    <!--https://github.com/mirari/v-viewer 참고 -->
-    <!--https://vuejsexamples.com/responsive-gallery-component-for-vuejs/ 참고-->
-    <div id="app">
-        <img class="image" v-for="(image, i) in images" :src="image" @click="onClick(i)">
-        <vue-gallery-slideshow :images="images" :index="index" @close="index = null"></vue-gallery-slideshow>
-    </div>
-
+  <!--https://github.com/mirari/v-viewer 참고 -->
+  <!--https://vuejsexamples.com/responsive-gallery-component-for-vuejs/ 참고-->
+  <div id="app">
+    <img
+      class="image"
+      v-for="(image, i) in images"
+      :src="image"
+      @click="onClick(i)"
+    />
+    <vue-gallery-slideshow
+      :images="images"
+      :index="index"
+      @close="index = null"
+    ></vue-gallery-slideshow>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "picture-popup"
-    }
+export default {
+  name: "picture-popup"
+};
 
-    /*
+/*
     new Vue({
         el: '#app',
         components: {
@@ -44,16 +52,16 @@
 </script>
 
 <style scoped>
-    body {
-        font-family: sans-serif;
-    }
+body {
+  font-family: sans-serif;
+}
 
-    .image {
-        width: 100px;
-        height: 100px;
-        background-size: contain;
-        cursor: pointer;
-        margin: 10px;
-        border-radius: 3px;
-    }
+.image {
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 3px;
+}
 </style>
