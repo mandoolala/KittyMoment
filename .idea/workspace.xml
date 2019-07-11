@@ -131,9 +131,11 @@
       <list>
         <option value="$PROJECT_DIR$/App.vue" />
         <option value="$PROJECT_DIR$/public/index.html" />
+
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/deploy.sh" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+
         <option value="$PROJECT_DIR$/vue.config.js" />
         <option value="$PROJECT_DIR$/.eslintrc.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
@@ -146,10 +148,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="4149" />
-    <option name="y" value="93" />
-    <option name="width" value="1238" />
-    <option name="height" value="978" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -161,28 +162,17 @@
         <subPane>
           <expand>
             <path>
-              <item name="kittymoments" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kittymoments" type="462c0819:PsiDirectoryNode" />
+              <item name="KittyMoments" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KittyMoments" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="kittymoments" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kittymoments" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kittymoments" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kittymoments" type="462c0819:PsiDirectoryNode" />
+              <item name="KittyMoments" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KittyMoments" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="kittymoments" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kittymoments" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="kittymoments" type="b2602c69:ProjectViewProjectNode" />
-              <item name="kittymoments" type="462c0819:PsiDirectoryNode" />
+              <item name="KittyMoments" type="b2602c69:ProjectViewProjectNode" />
+              <item name="KittyMoments" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="Pictures" type="462c0819:PsiDirectoryNode" />
@@ -204,6 +194,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -266,7 +257,8 @@
     <option name="totallyTimeSpent" value="12106000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4149" y="93" width="1238" height="978" extended-state="0" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34018078" />
       <window_info id="Structure" order="1" weight="0.25" />

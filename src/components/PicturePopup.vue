@@ -48,7 +48,7 @@ export default {
             index: 0
         }
     })
-     */
+ */
 </script>
 
 <style scoped>
