@@ -1,28 +1,31 @@
+// https://eslint.org/docs/user-guide/configuring
 module.exports = {
-    "env": {
-        "browser": true,
+    root: true,
+    parserOptions: {
+        parser: "babel-eslint",
+        sourceType: 'module'
+    },
+    env: {
+        browser: true,
         "es6": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    extends: [
+        "standard",
+        "plugin:vue/recommended",
+        "prettier"
+    ],
+    plugins: [
+        "html",
+        "standard",
+        "vue"
+    ],
+    // add your custom rules here
+    rules: {
+        // allow async-await
+        'generator-star-spacing': 'off',
+        // allow debugger during development
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }
+
 };
