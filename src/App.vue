@@ -7,7 +7,7 @@
 
       <div class="pageContent">
         <h2>Live Streaming</h2>
-        <LiveStream />
+          <img id="video" src="http://192.168.0.39:9000/stream/video.mjpeg" />
       </div>
       <div class="pageRightPanel">
         <h2>Gallery</h2>
@@ -171,6 +171,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+#video {
+    width: 700px;
+
+}
+
 .pageButton {
   /*background-color: blanchedalmond;*/
   float: left;
