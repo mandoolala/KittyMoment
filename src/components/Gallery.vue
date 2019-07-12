@@ -8,7 +8,7 @@
         </b-tab>
         <b-tab title="Video">
           <!-- 여기에 video list -->
-          <VideoPopup2></VideoPopup2>
+          <VideoPlayer></VideoPlayer>
         </b-tab>
       </b-tabs>
     </b-card>

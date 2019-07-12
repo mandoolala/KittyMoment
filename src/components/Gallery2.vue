@@ -6,7 +6,7 @@
       </v-tab>
 
       <v-tab title="Second tab" icon="ti-settings">
-        <VideoPopup2></VideoPopup2>
+        <VideoPlayer></VideoPlayer>
       </v-tab>
     </vue-tabs>
   </div>
@@ -18,6 +18,7 @@ import PicturePopup from "./PicturePopup";
 import PicturePopup2 from "./PicturePopup2";
 import PicturePopup3 from "./PicturePopup3";
 import VideoPopup2 from "./VideoPopup2";
+import VideoPopup3 from "./VideoPopup3";
 import { VueTabs, VTab } from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
 
@@ -29,6 +30,7 @@ export default {
     PicturePopup2,
     PicturePopup3,
     VideoPopup2,
+    VideoPopup3,
     VueTabs,
     VTab
   }

@@ -1,105 +1,85 @@
 <template>
-  <div class="video-player">
-    <div class="video-list">
-      <div
-        @click="chooseVideo(video)"
-        :key="video.id"
-        v-for="video in videos"
-        class="thumbnail"
-      >
-        <div class="thumbnail-img">
-          <img :src="video.thumbnail" />
-        </div>
-        <div class="thumbnail-info">
-          <p>{{ video.created_At }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <mdb-container class="mt-5">
+    <mdb-row>
+      <!-- Grid column -->
+      <mdb-col lg="5" md="6" class="mb-4" v-for="(item, index) in videos">
+        <a @click="showModal = true">
+          <img class="img-fluid z-depth-1"
+               src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
+               alt="video"
+               data-toggle="modal"
+               data-target="#modal1">
+        </a>
+        <mdb-modal size="lg"
+                   :show="showModal"
+                   @close="showModal = false">
+          <mdb-modal-body class="mb-0 p-0">
+            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+              <iframe class="embed-responsive-item"
+                      src="https://www.youtube.com/watch?v=vgbxL_WSoQ8"
+                      allowfullscreen>
+              </iframe>
+            </div>
+          </mdb-modal-body>
+        </mdb-modal>
+      </mdb-col>
+      <!-- Grid column -->
+    </mdb-row>
+  </mdb-container>
 </template>
 
+style
 <script>
-const videos = [
-  {
-    id: 1,
-    thumbnail: "https://placekitten.com/801/800",
-    videoURL: "https://www.youtube.com/watch?v=CEHGj8Dp2_I",
-    created_At: "201907112257"
-  },
-  {
-    id: 2,
-    thumbnail: "https://placekitten.com/802/800",
-    videoURL: "https://www.youtube.com/watch?v=4DBaCEIAEHA",
-    created_At: "201907112259"
-  },
-  {
-    id: 3,
-    thumbnail: "https://placekitten.com/803/800",
-    videoURL: "https://www.youtube.com/watch?v=pkYa6RXjaMQ",
-    created_At: "201907112301"
-  }
-];
-export default {
-  name: "VideoPlayer",
-  data() {
-    return {
-      videos,
-      activeVideo: videos[0]
-    };
-  },
-  methods: {
-    chooseVideo(video) {
-      this.activeVideo = video;
+  import { mdbContainer, mdbRow, mdbCol, mdbIcon, mdbBtn, mdbLightbox, mdbCarousel, mdbCarouselItem, mdbCarouselCaption, mdbCard, mdbModal, mdbModalHeader, mdbModalTitle, mdbModalBody, mdbModalFooter, mdbNavItem } from "mdbvue";
+  export default {
+    name: "GalleryPage",
+    data() {
+      return {
+        videos:[
+          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
+            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
+          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
+            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
+          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
+            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
+          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
+            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"}
+        ],
+        showModal: false,
+      };
+    },
+    components: {
+      mdbContainer,
+      mdbRow,
+      mdbCol,
+      mdbIcon,
+      mdbBtn,
+      mdbLightbox,
+      mdbCarousel,
+      mdbCarouselItem,
+      mdbCarouselCaption,
+      mdbCard,
+      mdbModal,
+      mdbModalHeader,
+      mdbModalTitle,
+      mdbModalBody,
+      mdbModalFooter,
+      mdbNavItem
     }
   }
-};
-
-/**
-     * 이미지 썸네일을 불러오는 function
-     * @param html : input 필드의 dom을 인자로 받는다. 물론 타입은 file
-     * @param $target : 불러온 이미지를 적용할 jquery 객체.
-
-    function getThumbnail(html, $target){
-        if(html.files && html.files[0]){
-            var reader = new FileReader();
-            reader.onload = function (e){
-                $target.css('background-image', 'url(\"' + e.target.result + '\")');
-            }
-            reader.readAsDataURL(html.files[0]);
-        }
-    }
-    **/
 </script>
 
 <style scoped>
-.thumbnail {
-  display: flex;
-}
-.thumbnail img {
-  width: 168px;
-}
+  @media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+      float: left;
+      width: 25%;
+      max-width: 100%; } }
 
-.thumbnail-info {
-  margin-left: 20px;
-}
+  .carousel-multi-item-2 .card img {
+    border-radius: 2px; }
 
-.thumbnail h3 {
-  font-size: 16px;
-}
-
-h3,
-p {
-  margin: 0;
-  padding: 0;
-}
-
-.video-player {
-  display: flex;
-  width: 1200px;
-  margin: auto;
-}
-
-.video-container {
-  margin-right: 40px;
-}
+  figure {
+    cursor: pointer;
+  }
 </style>
