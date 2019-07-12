@@ -1,22 +1,23 @@
 <template>
+
   <mdb-container class="mt-5">
     <mdb-row>
       <!-- Grid column -->
-      <mdb-col lg="5" md="6" class="mb-4" v-for="(item, index) in videos">
-        <a @click="showModal = true">
+      <mdb-col lg="4" md="6" class="mb-4" v-for="item in videos">
+        <a @click="item.showModal = true">
           <img class="img-fluid z-depth-1"
-               src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
+               v-bind:src="item.thumbnail"
                alt="video"
                data-toggle="modal"
                data-target="#modal1">
         </a>
         <mdb-modal size="lg"
-                   :show="showModal"
-                   @close="showModal = false">
+                   :show="item.showModal"
+                   @close="item.showModal = false">
           <mdb-modal-body class="mb-0 p-0">
             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
               <iframe class="embed-responsive-item"
-                      src="https://www.youtube.com/watch?v=vgbxL_WSoQ8"
+                      v-bind:src="item.video"
                       allowfullscreen>
               </iframe>
             </div>
@@ -36,16 +37,23 @@ style
     data() {
       return {
         videos:[
-          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
-            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
-          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
-            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
-          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
-            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"},
-          {video:"https://www.youtube.com/embed/A3PDXmYoF5U",
-            thumbnail:"https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"}
+          {video:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/videos%2Fvideo_1.mp4?alt=media&token=c9d2886f-e365-48e8-972c-f1a85f5b43d4",
+            thumbnail:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_1.jpg?alt=media&token=f917deba-7910-4ceb-ab78-0057074972ef",
+            showModal: false
+          },
+          {video:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/videos%2Fvideo_2.m4v?alt=media&token=3dc62221-320a-4539-9c87-3b22d615aa2d",
+            thumbnail:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_2.jpg?alt=media&token=56883206-32c4-4ffa-9e88-6796bed47a0a",
+            showModal: false
+          },
+          {video:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/videos%2Fvideo_3.m4v?alt=media&token=c5f15582-202a-4cf5-97da-b77d966efda9",
+            thumbnail:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_3.jpg?alt=media&token=01bf35c6-268e-4418-9e9c-38be12c6e27b",
+            showModal: false
+          },
+          {video:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/videos%2Fvideo_4.m4v?alt=media&token=9082e901-138c-4baa-b147-2f7aa48ce4b6",
+            thumbnail:"https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_4.jpg?alt=media&token=092656f1-6f73-46a3-a76d-52150dc21fe3",
+            showModal: false
+          }
         ],
-        showModal: false,
       };
     },
     components: {

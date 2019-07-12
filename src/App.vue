@@ -99,9 +99,13 @@ body {
   margin: 20px 0px 20px 0px;
   font-family: "Times New Roman";
   font-size: 12px;
+  background-image: url("./assets/back2.jpg");
+  background-repeat: no-repeat;
+  background-size:100%;
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffc6d7+0,ffdbe5+0,ffccdb+25,ffbacd+50,ffb2c8+75,ffadc1+100 */
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffc6d7+0,ffbcce+0,ffccd9+25,ffd1dd+50,ffdde6+75,ffeaf0+100 */
-  background: #ffc6d7; /* Old browsers */
+ /*
+  background: #ffc6d7;
   background: -moz-linear-gradient(
     top,
     #ffc6d7 0%,
@@ -110,7 +114,7 @@ body {
     #ffd1dd 50%,
     #ffdde6 75%,
     #ffeaf0 100%
-  ); /* FF3.6-15 */
+  );
   background: -webkit-linear-gradient(
     top,
     #ffc6d7 0%,
@@ -119,7 +123,7 @@ body {
     #ffd1dd 50%,
     #ffdde6 75%,
     #ffeaf0 100%
-  ); /* Chrome10-25,Safari5.1-6 */
+  );
   background: linear-gradient(
     to bottom,
     #ffc6d7 0%,
@@ -128,8 +132,8 @@ body {
     #ffd1dd 50%,
     #ffdde6 75%,
     #ffeaf0 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc6d7', endColorstr='#ffeaf0',GradientType=0 ); /* IE6-9 */
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc6d7', endColorstr='#ffeaf0',GradientType=0 );*/
 }
 .page {
   display: block;
@@ -167,7 +171,7 @@ body {
   clear: none;
   font-family: "Lobster";
   margin-right: 20px;
-  width: 32%;
+  width: 40%;
   display: flex;
   flex-direction: column;
 }
@@ -177,7 +181,7 @@ body {
   clear: none;
   font-family: "Lobster";
   margin-left: 20px;
-  width: 64%;
+  width: 60%;
   display: flex;
   flex-direction: column;
 }

@@ -24,10 +24,10 @@
                 images: [
                     {
                         title: 'A YouYube video',
-                        href: './assets/Videos/video_1.mp4',
+                        href: 'https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/videos%2Fvideo_2.m4v?alt=media&token=3dc62221-320a-4539-9c87-3b22d615aa2d',
                         type: 'text/html',
                         youtube: 'hNdlUHBJDKs',
-                        poster: 'https://img.youtube.com/vi/hNdlUHBJDKs/maxresdefault.jpg'
+                        poster: 'https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_11.jpg?alt=media&token=3d58097a-4b22-46a7-9be6-1b20757753dc'
                     },
                     {
                         title: 'A YouYube video 2',
