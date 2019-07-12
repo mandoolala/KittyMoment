@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-tabs active-tab-color="white" active-text-color="#FFBCCE">
+    <vue-tabs active-tab-color="white" active-text-color="#FF82A3">
       <v-tab title="First tab" icon="ti-user">
         <PicturePopup3></PicturePopup3>
       </v-tab>
