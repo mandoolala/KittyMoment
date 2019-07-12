@@ -22,6 +22,7 @@
         />
 
         <p align="right">
+
           <button id="btnCapture" v-on:click="imageCapture"> CAPTURE </button>
           <button id="btnRecord"> RECORD </button>
         </p>
@@ -43,6 +44,27 @@ import LiveStream from "./components/LiveStream.vue";
 // import VueGallerySlideshow from "vue-gallery-slideshow";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import moment from "moment";
+moment().format();
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDYm0LyiQt00CIxpIPjAJ2ia_U5nlX6lUw",
+  authDomain: "kittymoments.firebaseapp.com",
+  databaseURL: "https://kittymoments.firebaseio.com",
+  projectId: "kittymoments",
+  storageBucket: "kittymoments.appspot.com",
+  messagingSenderId: "993659424800",
+  appId: "1:993659424800:web:369f1500eefe3b4e"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const storage = firebase.storage();
+const storageRef = storage.ref();
+const imagesRef = storageRef.child("images");
+
 
 export default {
   name: "App",
@@ -50,7 +72,7 @@ export default {
     // Gallery,
     //LiveStream,
     // PicturePopup,
-    // VideoPCopup,
+    // VideoPopup,
     // PicturePopup2,
     Gallery2
   },
@@ -71,13 +93,28 @@ export default {
   },
   methods: {
     imageCapture: function(event){
-      const c = document.createElement('canvas');
-      const img = document.getElementById('video');
-      c.width = img.width;
-      c.height = img.height;
-      const ctx = c.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      window.open(c.toDataURL('image/png'));
+
+      const timestamp = moment(new Date()).format("MM-DD-YYYY h:mm:ss");
+      const CaptureRef = imagesRef.child(timestamp);
+
+      fetch("http://192.168.0.39:9000/stream/snapshot.jpeg")
+        .then(res => res.blob()) // Gets the response and returns it as a blob
+        .then(blob => {
+          // Here's where you get access to the blob
+          // And you can use it for whatever you want
+          // Like calling ref().put(blob)
+
+          CaptureRef.put(blob);
+
+          // Here, I use it to make an image appear on the page
+          // let objectURL = URL.createObjectURL(blob);
+          // let myImage = new Image();
+          // myImage.src = objectURL;
+          // document.getElementById('myImg').appendChild(myImage)
+        });
+
+
+
     }
   }
 };

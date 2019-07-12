@@ -1,5 +1,5 @@
 // File or Blob named mountains.jpg
-var file = new File()
+var file = new File();
 
 // Create the file metadata
 var metadata = {
