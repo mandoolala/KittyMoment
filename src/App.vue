@@ -7,7 +7,7 @@
 
       <div class="pageContent">
         <h2>Live Streaming</h2>
-          <img id="video" src="http://192.168.0.39:9000/stream/video.mjpeg" />
+          <img crossorigin="anonymous" id="video" src="http://192.168.0.39:9000/stream/video.mjpeg" />
       </div>
       <div class="pageRightPanel">
         <h2>Gallery</h2>
@@ -22,7 +22,7 @@
         />
 
         <p align="right">
-          <button id="btnCapture"> CAPTURE </button>
+          <button id="btnCapture" v-on:click="imageCapture"> CAPTURE </button>
           <button id="btnRecord"> RECORD </button>
         </p>
       </div>
@@ -43,15 +43,14 @@ import LiveStream from "./components/LiveStream.vue";
 // import VueGallerySlideshow from "vue-gallery-slideshow";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import ToggleButton from "vue-js-toggle-button";
 
 export default {
   name: "App",
   components: {
     // Gallery,
-    LiveStream,
+    //LiveStream,
     // PicturePopup,
-    // VideoPopup,
+    // VideoPCopup,
     // PicturePopup2,
     Gallery2
   },
@@ -69,9 +68,20 @@ export default {
         created_At: ""
       }
     };
+  },
+  methods: {
+    imageCapture: function(event){
+      const c = document.createElement('canvas');
+      const img = document.getElementById('video');
+      c.width = img.width;
+      c.height = img.height;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      window.open(c.toDataURL('image/png'));
+    }
   }
 };
-Vue.use(ToggleButton);
+
 </script>
 
 <style>
