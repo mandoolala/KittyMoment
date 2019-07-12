@@ -13,7 +13,7 @@
             </div>
             <div class="pageRightPanel">
                 <h2>Gallery</h2>
-                <Gallery></Gallery>
+                <gallery></gallery>
             </div>
             <div class="pageButton">
                 <toggle-button :value="false"
@@ -35,7 +35,7 @@ import Vue from 'vue';
 import Gallery from "./components/Gallery.vue";
 import LiveStream from "./components/LiveStream.vue";
 import PicturePopup from "./components/PicturePopup.vue";
-import PicturePopup2 from "./components/PicturePopup.vue";
+import PicturePopup2 from "./components/PicturePopup2.vue";
 import VideoPopup from "./components/VideoPopup.vue";
 import VideoPlayer from "./components/VideoPlayer.vue"
 import VueGallerySlideshow from "vue-gallery-slideshow"
