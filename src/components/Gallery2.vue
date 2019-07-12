@@ -1,22 +1,43 @@
 <template>
-    <div id="app">
-        <a href="'http://http://placekitten.com/801/801/'+n" v-lightbox v-for="n in 9">
-            <img src="'http://placekitten.com/400/300/'+n">
-        </a>
-        <lightbox></lightbox>
+    <div>
+        <vue-tabs active-tab-color="white"
+                  active-text-color="#FFBCCE"
+        >
+            <v-tab title="First tab" icon="ti-user">
+                <PicturePopup3></PicturePopup3>
+            </v-tab>
+
+            <v-tab title="Second tab" icon="ti-settings">
+                <VideoPopup2></VideoPopup2>
+            </v-tab>
+        </vue-tabs>
     </div>
+
 </template>
 
 <script>
-    import Lightbox from './lightbox/Lightbox.vue'
+    import VideoPlayer from "./VideoPlayer";
+    import PicturePopup from "./PicturePopup"
+    import PicturePopup2 from "./PicturePopup2"
+    import PicturePopup3 from "./PicturePopup3"
+    import VideoPopup2 from "./VideoPopup2"
+    import {VueTabs, VTab} from 'vue-nav-tabs'
+    import 'vue-nav-tabs/themes/vue-tabs.css'
 
     export default {
-        components:{
-            Lightbox
-        },
-        name: "Gallery2"
+        name: "Gallery2",
+        components: {
+            VideoPlayer,
+            PicturePopup,
+            PicturePopup2,
+            PicturePopup3,
+            VideoPopup2,
+            VueTabs,
+            VTab
+        }
     }
 </script>
+
 
 <style scoped>
 
