@@ -7,7 +7,7 @@
 
       <div class="pageContent">
         <h2>Live Streaming</h2>
-          <img crossorigin="anonymous" id="video" src="http://192.168.0.39:9000/stream/video.mjpeg" />
+          <img crossorigin="anonymous" id="video" src="http://1.246.1.243:9000/stream/video.mjpeg" />
       </div>
       <div class="pageRightPanel">
         <h2>Gallery</h2>
