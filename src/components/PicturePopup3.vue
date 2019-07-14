@@ -17,6 +17,8 @@
 
 <script>
 import VueGallery from "vue-gallery";
+import firebase from 'firebase';
+
 
 export default {
   data: function() {

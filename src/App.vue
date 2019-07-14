@@ -22,7 +22,6 @@
         />
 
         <p align="right">
-
           <button id="btnCapture" v-on:click="imageCapture"> CAPTURE </button>
           <button id="btnRecord"> RECORD </button>
         </p>
@@ -34,14 +33,7 @@
 
 <script>
 import Vue from "vue";
-// import Gallery from "./components/Gallery.vue";
 import Gallery2 from "./components/Gallery2.vue";
-import LiveStream from "./components/LiveStream.vue";
-// import PicturePopup from "./components/PicturePopup.vue";
-// import PicturePopup2 from "./components/PicturePopup2.vue";
-// import VideoPopup from "./components/VideoPopup.vue";
-// import VideoPlayer from "./components/VideoPlayer.vue";
-// import VueGallerySlideshow from "vue-gallery-slideshow";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import moment from "moment";
@@ -69,11 +61,6 @@ const imagesRef = storageRef.child("images");
 export default {
   name: "App",
   components: {
-    // Gallery,
-    //LiveStream,
-    // PicturePopup,
-    // VideoPopup,
-    // PicturePopup2,
     Gallery2
   },
   data() {
@@ -123,6 +110,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Bad+Script|Lobster|Lobster+Two|Merienda|Pacifico|Rancho|Satisfy|Sniglet|Tangerine|Varela+Round&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Atma|Crafty+Girls|Delius+Swash+Caps|Gabriela|Sunshiney|Unkempt&display=swap');
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -184,8 +172,9 @@ body {
   /*background-color: lightpink;*/
   float: left;
   clear: none;
-  font-family: "Lobster";
-  font-size: 50px;
+  font-family: "Atma";
+  font-weight: 800;
+  font-size: 100px;
   min-height: 150px;
   width: 100%;
   box-sizing: border-box;
@@ -206,7 +195,7 @@ body {
   /*background-color: aqua;*/
   float: right;
   clear: none;
-  font-family: "Lobster";
+  font-family: "Atma";
   margin-right: 20px;
   width: 40%;
   display: flex;
@@ -216,7 +205,7 @@ body {
   /*background-color: aquamarine;*/
   float: left;
   clear: none;
-  font-family: "Lobster";
+  font-family: "Atma";
   margin-left: 20px;
   width: 60%;
   display: flex;
@@ -245,5 +234,28 @@ body {
   display: flex;
   flex-direction: row;
   min-height: 50px;
+}
+
+h1 {
+  display: block;
+  font-size: 50px;
+  /*
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  */
+  font-weight: bold;
+}
+h2 {
+  display: block;
+  font-size: 30px;
+  /*
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  */
+  font-weight: bold;
 }
 </style>
