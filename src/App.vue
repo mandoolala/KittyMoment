@@ -4,35 +4,36 @@
       <div class="pageHeader">
         <h1>Kitty Moments</h1>
       </div>
-
-      <div class="pageContent">
-        <h2>Live Streaming</h2>
+      <div class="pageMain">
+        <div class="pageContent">
+          <h2>Live Streaming</h2>
           <img crossorigin="anonymous" id="video" src="http://1.246.1.243:9000/stream/video.mjpeg" />
-      </div>
-      <div class="pageRightPanel">
-        <h2>Gallery</h2>
-        <gallery2 />
-      </div>
-      <div class="pageButton">
-        <toggle-button
-          :value="false"
-          color="#FF82A3"
-          :sync="true"
-          :labels="true"
-        />
+          <div class="pageButton">
+            <toggle-button
+                    :value="false"
+                    color="#FF82A3"
+                    :sync="true"
+                    :labels="true"/>
 
-        <p align="right">
-          <button id="btnCapture" v-on:click="imageCapture"> CAPTURE </button>
-          <button id="btnRecord"> RECORD </button>
-        </p>
+            <p align="right">
+              <button id="btnCapture" v-on:click="imageCapture"> CAPTURE </button>
+              <button id="btnRecord"> RECORD </button>
+            </p>
+          </div>
+        </div>
+        <div class="pageRightPanel">
+          <h2>Gallery</h2>
+          <gallery2 />
+        </div>
       </div>
+
+
       <div class="pageFooter" />
     </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
 import Gallery2 from "./components/Gallery2.vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -161,9 +162,9 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc6d7', endColorstr='#ffeaf0',GradientType=0 );*/
 }
 .page {
-  display: block;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow: auto;
   margin: 0px auto 0px auto;
   box-sizing: border-box;
@@ -180,61 +181,6 @@ body {
   box-sizing: border-box;
   padding: 10px;
 }
-.pageNavigator {
-  /*background-color: lightcoral;*/
-  color: #ffffff;
-  text-align: center;
-  float: left;
-  clear: none;
-  min-height: 50px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-}
-.pageRightPanel {
-  /*background-color: aqua;*/
-  float: right;
-  clear: none;
-  font-family: "Atma";
-  margin-right: 20px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-}
-.pageContent {
-  /*background-color: aquamarine;*/
-  float: left;
-  clear: none;
-  font-family: "Atma";
-  margin-left: 20px;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-}
-
-#video {
-    width: 700px;
-
-}
-
-.pageButton {
-  /*background-color: blanchedalmond;*/
-  float: left;
-  margin-left: 20px;
-  clear: none;
-  width: 64%;
-  display: flex;
-  flex-direction: row;
-}
-.pageFooter {
-  /*background-color: peachpuff;*/
-  float: left;
-  width: 100%;
-  clear: none;
-  display: flex;
-  flex-direction: row;
-  min-height: 50px;
-}
 
 h1 {
   display: block;
@@ -247,9 +193,29 @@ h1 {
   */
   font-weight: bold;
 }
+
+.pageMain {
+  display:flex;
+  flex-direction: row;
+}
+
+.pageNavigator {
+  /*background-color: lightcoral;*/
+  color: #ffffff;
+  text-align: center;
+  float: left;
+  clear: none;
+  min-height: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
 h2 {
   display: block;
   font-size: 30px;
+  text-align: left;
+  margin-bottom: 20px;
   /*
   margin-top: 0.67em;
   margin-bottom: 0.67em;
@@ -258,4 +224,51 @@ h2 {
   */
   font-weight: bold;
 }
+
+.pageContent {
+  /*background-color: aquamarine;*/
+  display: flex;
+  flex-direction: column;
+  flex:3;
+  font-family: "Atma";
+  padding: 50px;
+}
+
+#video {
+  width: 100%;
+
+}
+
+.pageButton {
+  /*background-color: blanchedalmond;*/
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 12px;
+}
+
+.pageRightPanel {
+  /*background-color: aqua;*/
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  font-family: "Atma";
+  padding: 50px;
+
+}
+
+
+
+.pageFooter {
+  /*background-color: peachpuff;*/
+  float: left;
+  width: 100%;
+  clear: none;
+  display: flex;
+  flex-direction: row;
+  min-height: 50px;
+}
+
+
+
 </style>

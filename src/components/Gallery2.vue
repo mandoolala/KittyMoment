@@ -29,4 +29,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+
+.vue-tabs .nav > li span.title{
+  font-size: 18px;
+}
+
+</style>

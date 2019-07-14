@@ -17,8 +17,6 @@
 
 <script>
 import VueGallery from "vue-gallery";
-import firebase from 'firebase';
-
 
 export default {
   data: function() {
@@ -54,4 +52,7 @@ export default {
   border: 1px solid #ebebeb;
   margin: 5px;
 }
+
+
+
 </style>
