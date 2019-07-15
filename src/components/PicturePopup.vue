@@ -1,13 +1,13 @@
 <template>
   <div>
-    <gallery :images="images" :index="index" @close="index = null"></gallery>
+    <gallery :images="images" :index="index" :options="options" @close="index = null"></gallery>
     <div
       class="image"
       v-for="(image, imageIndex) in images"
       :key="imageIndex"
       @click="index = imageIndex"
       :style="{
-        backgroundImage: 'url(' + image + ')',
+        backgroundImage: 'url(' + image.dataURL + ')',
         width: '240px',
         height: '180px'
       }"
@@ -19,6 +19,7 @@
 
 <script>
 import VueGallery from "vue-gallery";
+
 
 const indicatorOptions = {
   // The tag name, Id, element or querySelector of the indicator container:
@@ -39,14 +40,11 @@ const fullscreenOptions = {
 
 export default {
   name: "PicturePopup",
+  props: ["images"],
   data: function() {
     return {
-      images: [
-        "https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_1.jpg?alt=media&token=f917deba-7910-4ceb-ab78-0057074972ef",
-        "https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2F07-13-2019%201%3A31%3A28?alt=media&token=e82edc9d-3409-4d55-ab3a-2d35c6de2b72"
-      ],
       index: null,
-      options: { fullscreenOptions, indicatorOptions }
+      options: { ...fullscreenOptions, ...indicatorOptions }
     };
   },
   components: {

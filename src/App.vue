@@ -9,7 +9,7 @@
           <h2>Live Streaming</h2>
           <img
             id="video"
-            ref="videoRec"
+            ref="video"
             crossorigin="anonymous"
             src="http://1.246.1.243:9000/stream/video.mjpeg"
           />
@@ -17,8 +17,9 @@
             ref="canvas"
             width="1640"
             height="920"
-            style="width: 500px; position: absolute; top: -500px;"
-          />
+            style="width:500px; position: absolute; top: -500px;"
+          >
+          </canvas>
           <div class="pageButton">
             <div id="autotoggle">
               <p>Auto Capture Mode</p>
@@ -30,24 +31,45 @@
                 style="margin-left: 10px"
               />
             </div>
-            <p align="right">
+            <div style="display:flex; flex-direction: row;">
               <button id="btnCapture" @click="imageCapture">
-                <img v-bind:src="require('./assets/camera.svg')" />Take Photo
+                <img v-bind:src="require('./assets/camera.svg')" />
+                Take Photo
               </button>
-              <button id="btnRecord" ref="recordButton" @click="videoRecord">
-                <img
-                  v-bind:src="recordstart"
-                  @click="recordstart = recordstop"
-                />
-                {{ buttontext.text }}
-              </button>
-            </p>
+              <div>
+                <button
+                  class="btnRecord"
+                  v-show="!onRecord"
+                  @click="videoRecord"
+                >
+                  <img v-bind:src="recordstart" />
+                  Start Recording
+                </button>
+                <button
+                  class="btnRecord"
+                  v-show="onRecord"
+                  @click="videoRecord"
+                >
+                  <img v-bind:src="recordstop" />
+                  Stop Recording
+                </button>
+              </div>
+            </div>
           </div>
-          <p ref="recordtime" style="">Record time</p>
         </div>
         <div class="pageRightPanel">
           <h2>Gallery</h2>
-          <gallery />
+          <div>
+            <vue-tabs active-tab-color="white" active-text-color="#FF82A3">
+              <v-tab title="Pictures" icon="ti-user">
+                <PicturePopup v-bind:images="images"></PicturePopup>
+              </v-tab>
+
+              <v-tab title="Videos">
+                <VideoPopup v-bind:videos="videos"></VideoPopup>
+              </v-tab>
+            </vue-tabs>
+          </div>
         </div>
       </div>
 
@@ -57,14 +79,20 @@
 </template>
 
 <script>
-import Gallery from "./components/Gallery.vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+
+import { VueTabs, VTab } from "vue-nav-tabs";
+import "vue-nav-tabs/themes/vue-tabs.css";
+
+import PicturePopup from "./components/PicturePopup";
+import VideoPopup from "./components/VideoPopup";
 
 import toastr from "toastr";
 import moment from "moment";
 moment().format();
 
+// Initialize Firebase
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDYm0LyiQt00CIxpIPjAJ2ia_U5nlX6lUw",
@@ -75,44 +103,49 @@ const firebaseConfig = {
   messagingSenderId: "993659424800",
   appId: "1:993659424800:web:369f1500eefe3b4e"
 };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
-const storage = firebase.storage();
-const storageRef = storage.ref();
-const imagesRef = storageRef.child("images");
-const videoRef = storageRef.child("videos");
+let storage;
+let storageRef;
+let imagesRef;
+let videoRef;
 
 let mediaRecorder;
 let recordedBlobs;
-
+let timestamp;
+let RecordRef;
+let raf;
 export default {
   name: "App",
   components: {
-    Gallery
+    VueTabs,
+    VTab,
+    PicturePopup,
+    VideoPopup,
+  },
+  created() {
+    firebase.initializeApp(firebaseConfig);
+    storage = firebase.storage();
+    storageRef = storage.ref();
+    imagesRef = storageRef.child("images");
+    videoRef = storageRef.child("videos");
   },
   data() {
     return {
       recordstart: require("./assets/video.svg"),
       recordstop: require("./assets/stop.svg"),
-      buttontext: {
-        text: 'Start Recording'
-      },
+      onRecord: false,
 
-    images: [
-        {
-          title: "",
-          dataURL: ""
-        }
+      images: [
       ],
+
       videos: [
-        {
+        /*{
           title: "",
           dataURL: "",
           playLength: "",
           ThumbnailURL: "",
           showModal: false
-        }
+        }*/
       ]
     };
   },
@@ -166,101 +199,119 @@ export default {
               }
             },
             () => {
+              const snapshotRef = uploadTask.snapshot.ref;
               // Upload completed successfully, now we can get the download URL
-              uploadTask.snapshot.ref
-                .getDownloadURL()
-                .then(function(downloadURL) {
-                  images.push({
-                    title: snapshot.ref.name,
-                    dataURL: downloadURL
-                  });
+              uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+                this.images.push({
+                  title: snapshotRef.name,
+                  dataURL: downloadURL
                 });
+              });
             }
           );
         });
     },
 
-    videoRecord: function(event) {
-      let canvas = this.$refs.canvas;
-      const recordButton = this.$refs.recordButton;
-      const timestamp = moment(new Date()).format("DD-MMM-YYYY hh:mm A");
-      const metadata = {
-        contentType: "videp/webm"
-      };
-      const RecordRef = videoRef.child(timestamp);
-
-      function upload(blob) {
-        const uploadTask = RecordRef.put(blob, metadata);
-        // Listen for state changes, errors, and completion of the upload.
-        uploadTask.on(
-          firebase.storage.TaskEvent.STATE_CHANGED,
-          snapshot => {
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            toastr.info("Upload is " + progress + "% done");
-            switch (snapshot.state) {
-              case firebase.storage.TaskState.PAUSED: // or 'paused'
-                console.log("Upload is paused");
-                break;
-              case firebase.storage.TaskState.RUNNING: // or 'running'
-                console.log("Upload is running");
-                break;
-            }
-          },
-          error => {
-            switch (error.code) {
-              case "storage/unauthorized":
-                alert("User doesn't have permission to access the object");
-                break;
-
-              case "storage/canceled":
-                alert("User canceled the upload");
-                break;
-
-              case "storage/unknown":
-                alert("Unknown error occurred, inspect error.serverResponse");
-                break;
-            }
-          },
-          () => {
-            // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref
-              .getDownloadURL()
-              .then(function(downloadURL) {
-                videos.push({
-                  title: snapshot.ref.name,
-                  dataURL: downloadURL
-                });
-              });
-          }
-        );
+    videoRecord: function() {
+      if (this.onRecord === false) {
+        this.onRecord = true;
+        this.startRecording();
+      } else {
+        this.onRecord = false;
+        this.stopRecording();
       }
+    },
+
+    startRecording: function() {
+      const canvas = this.$refs.canvas;
+      const stream = canvas.captureStream();
+      const options = { mimeType: "video/webm" };
+      const img = this.$refs.video;
+
+      cancelAnimationFrame(raf);
+      const copy = () => {
+        raf = requestAnimationFrame(copy);
+        canvas.getContext('2d').drawImage(img, 0, 0);
+      };
+      raf = requestAnimationFrame(copy);
+
+      timestamp = moment(new Date()).format("DD-MMM-YYYY hh:mm A");
+      RecordRef = videoRef.child(timestamp);
+
+      recordedBlobs = [];
+
+      mediaRecorder = new MediaRecorder(stream, options);
+      mediaRecorder.onstop = () => {
+        const superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
+        this.upload(superBuffer, RecordRef);
+      };
       function handleDataAvailable(event) {
         if (event.data && event.data.size > 0) {
           recordedBlobs.push(event.data);
+          console.log('put')
         }
       }
-      function handleStop(event) {
-        const superBuffer = new Blob(recordedBlobs, { type: "video/webm" });
-        upload(superBuffer);
-      }
-      const stream = canvas.captureStream();
-      let options = { mimeType: "video/webm" };
-      mediaRecorder = new MediaRecorder(stream, options);
-      recordedBlobs = [];
 
-      if (this.buttontext.text === "Start Recording") {
-        this.buttontext.text = "Stop Recording";
-        mediaRecorder.onstop = handleStop;
-        mediaRecorder.ondataavailable = handleDataAvailable;
-        mediaRecorder.start(1000); // collect 100ms of data
-      } else {
-        mediaRecorder.stop();
-        this.buttontext.text = "Start Recording";
-        const blob = new Blob(recordedBlobs, { type: "video/webm" });
-        upload(blob);
-      }
+      mediaRecorder.ondataavailable = handleDataAvailable;
+
+      mediaRecorder.start(100);
+
+    },
+    stopRecording: function() {
+      cancelAnimationFrame(raf);
+      mediaRecorder.stop();
+      const blob = new Blob(recordedBlobs, { type: "video/webm" });
+      console.log(recordedBlobs);
+      this.upload(blob, RecordRef);
+    },
+    upload: function(blob, RecordRef) {
+      // const metadata = {
+      //   contentType: "videp/webm"
+      // };
+      const uploadTask = RecordRef.put(blob);
+      // Listen for state changes, errors, and completion of the upload.
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        snapshot => {
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          toastr.info("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+              console.log("Upload is paused");
+              break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+              console.log("Upload is running");
+              break;
+          }
+        },
+        error => {
+          switch (error.code) {
+            case "storage/unauthorized":
+              alert("User doesn't have permission to access the object");
+              break;
+
+            case "storage/canceled":
+              alert("User canceled the upload");
+              break;
+
+            case "storage/unknown":
+              alert("Unknown error occurred, inspect error.serverResponse");
+              break;
+          }
+        },
+        () => {
+          const snapshotRef = uploadTask.snapshot.ref;
+          // Upload completed successfully, now we can get the download URL
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            this.videos.push({
+              title: snapshotRef.name,
+              dataURL: downloadURL
+            });
+          });
+        }
+      );
     }
   }
 };
@@ -411,13 +462,17 @@ h2 {
 #btnCapture {
   font-size: 16px;
   font-weight: bolder;
+  height: 29px;
 }
 
-#btnRecord {
+.btnRecord {
   font-size: 16px;
   margin-left: 10px;
 
   font-weight: bolder;
+}
+
+#recordtime {
 }
 
 .pageRightPanel {
@@ -427,6 +482,11 @@ h2 {
   flex: 2;
   font-family: "Atma";
   padding: 50px;
+}
+
+.vue-tabs .nav > li span.title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .pageFooter {
