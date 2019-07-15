@@ -4,13 +4,21 @@
       <!-- Grid column -->
       <mdb-col lg="4" md="6" class="mb-4" v-for="item in videos">
         <a @click="item.showModal = true">
-          <img
+          <video
             class="img-fluid z-depth-1"
-            v-bind:src="item.thumbnail"
+            v-bind:src="item.dataURL"
             alt="video"
             data-toggle="modal"
             data-target="#modal1"
-          />
+            preload="metadata"
+          ></video>
+          <!--<img
+            class="img-fluid z-depth-1"
+            v-bind:src="item.ThumbnailURL"
+            alt="video"
+            data-toggle="modal"
+            data-target="#modal1"
+          />-->
         </a>
         <mdb-modal
           size="lg"
@@ -36,26 +44,25 @@
 
 style
 <script>
-  import {
-    mdbBtn,
-    mdbCarousel,
-    mdbCarouselCaption,
-    mdbCarouselItem,
-    mdbCol,
-    mdbContainer,
-    mdbIcon,
-    mdbModal,
-    mdbModalBody,
-    mdbRow
-  } from "mdbvue";
+import {
+  mdbBtn,
+  mdbCarousel,
+  mdbCarouselCaption,
+  mdbCarouselItem,
+  mdbCol,
+  mdbContainer,
+  mdbIcon,
+  mdbModal,
+  mdbModalBody,
+  mdbRow
+} from "mdbvue";
 
-  export default {
+export default {
   name: "VideoPopup",
-    props: ["videos"],
+  props: ["videos"],
 
-    data() {
-    return {
-    };
+  data() {
+    return {};
   },
   components: {
     mdbBtn,

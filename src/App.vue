@@ -120,7 +120,7 @@ export default {
     VueTabs,
     VTab,
     PicturePopup,
-    VideoPopup,
+    VideoPopup
   },
   created() {
     firebase.initializeApp(firebaseConfig);
@@ -128,25 +128,50 @@ export default {
     storageRef = storage.ref();
     imagesRef = storageRef.child("images");
     videoRef = storageRef.child("videos");
+
+    imagesRef
+      .listAll()
+      .then(res => {
+        res.items.forEach(itemRef => {
+          itemRef.getDownloadURL().then(downloadURL => {
+            this.images.push({
+              title: itemRef.name,
+              dataURL: downloadURL
+            });
+          });
+        });
+      })
+      .catch(function(error) {
+        console.log("could not retreive list");
+      });
+
+    videoRef
+      .listAll()
+      .then(res => {
+        res.items.forEach(itemRef => {
+          itemRef.getDownloadURL().then(downloadURL => {
+            this.videos.push({
+              title: itemRef.name,
+              dataURL: downloadURL,
+              showModal: false
+            });
+          });
+        });
+      })
+      .catch(function(error) {
+        console.log("could not retreive list");
+      });
   },
+
   data() {
     return {
       recordstart: require("./assets/video.svg"),
       recordstop: require("./assets/stop.svg"),
       onRecord: false,
 
-      images: [
-      ],
+      images: [],
 
-      videos: [
-        /*{
-          title: "",
-          dataURL: "",
-          playLength: "",
-          ThumbnailURL: "",
-          showModal: false
-        }*/
-      ]
+      videos: []
     };
   },
   methods: {
@@ -202,7 +227,7 @@ export default {
               const snapshotRef = uploadTask.snapshot.ref;
               // Upload completed successfully, now we can get the download URL
               uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-                this.images.push({
+                this.images.unshift({
                   title: snapshotRef.name,
                   dataURL: downloadURL
                 });
@@ -231,7 +256,7 @@ export default {
       cancelAnimationFrame(raf);
       const copy = () => {
         raf = requestAnimationFrame(copy);
-        canvas.getContext('2d').drawImage(img, 0, 0);
+        canvas.getContext("2d").drawImage(img, 0, 0);
       };
       raf = requestAnimationFrame(copy);
 
@@ -248,22 +273,19 @@ export default {
       function handleDataAvailable(event) {
         if (event.data && event.data.size > 0) {
           recordedBlobs.push(event.data);
-          console.log('put')
+          console.log("put");
         }
       }
 
       mediaRecorder.ondataavailable = handleDataAvailable;
-
       mediaRecorder.start(100);
-
     },
+
     stopRecording: function() {
       cancelAnimationFrame(raf);
       mediaRecorder.stop();
-      const blob = new Blob(recordedBlobs, { type: "video/webm" });
-      console.log(recordedBlobs);
-      this.upload(blob, RecordRef);
     },
+
     upload: function(blob, RecordRef) {
       // const metadata = {
       //   contentType: "videp/webm"
@@ -305,9 +327,10 @@ export default {
           const snapshotRef = uploadTask.snapshot.ref;
           // Upload completed successfully, now we can get the download URL
           uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.videos.push({
+            this.videos.unshift({
               title: snapshotRef.name,
-              dataURL: downloadURL
+              dataURL: downloadURL,
+              showModal: false
             });
           });
         }

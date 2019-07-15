@@ -55,7 +55,9 @@ export default {
       this.index = imageIndex;
       const url = this.images[this.index];
       URL.revokeObjectURL(url);
+
       this.images.splice(this.index, 1);
+
     }
   }
 };
