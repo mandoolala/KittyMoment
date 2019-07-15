@@ -1,100 +1,142 @@
 <template>
-  <div class="picture-list">
-    <div v-for="picture in pictures" class="thumbnail">
-      <img :src="picture.image" />
-      <VueEasyLightbox
-        :visible="visible"
-        :imgs="imgs"
-        :index="index"
-        @hide="handleHide"
-      ></VueEasyLightbox>
-
-      <div class="thumbnail-info">
-        <p>{{ picture.created_At }}</p>
-      </div>
+  <div>
+    <gallery :images="images" :index="index" @close="index = null"></gallery>
+    <div
+      class="image"
+      v-for="(image, imageIndex) in images"
+      :key="imageIndex"
+      @click="index = imageIndex"
+      :style="{
+        backgroundImage: 'url(' + image + ')',
+        width: '240px',
+        height: '180px'
+      }"
+    >
+      <button v-on:click="removeImage(imageIndex)">X</button>
     </div>
   </div>
 </template>
 
 <script>
-import VueEasyLightbox from "vue-easy-lightbox";
+import VueGallery from "vue-gallery";
 
-let pictures = [
-  {
-    id: 0,
-    image: "https://placekitten.com/801/800",
-    created_At: "201907120019"
-  },
-  {
-    id: 1,
-    image: "https://placekitten.com/802/800",
-    created_At: "201907120020"
-  },
-  {
-    id: 2,
-    image: "https://placekitten.com/803/800",
-    created_At: "201907120021"
-  }
-];
+const indicatorOptions = {
+  // The tag name, Id, element or querySelector of the indicator container:
+  indicatorContainer: "ol",
+  // The class for the active indicator:
+  activeIndicatorClass: "active",
+  // The list object property (or data attribute) with the thumbnail URL,
+  // used as alternative to a thumbnail child element:
+  thumbnailProperty: "thumbnail",
+  // Defines if the gallery indicators should display a thumbnail:
+  thumbnailIndicators: true
+};
+
+const fullscreenOptions = {
+  // Defines if the gallery should open in fullscreen mode:
+  fullScreen: false
+};
+
 export default {
   name: "PicturePopup",
-  components: {
-    VueEasyLightbox
-  },
-
-  data() {
+  data: function() {
     return {
-      pictures,
-      imgs: "", // Img Url , string or Array
-      visible: false,
-      index: 0 // default
+      images: [
+        "https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_1.jpg?alt=media&token=f917deba-7910-4ceb-ab78-0057074972ef",
+        "https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2F07-13-2019%201%3A31%3A28?alt=media&token=e82edc9d-3409-4d55-ab3a-2d35c6de2b72"
+      ],
+      index: null,
+      options: { fullscreenOptions, indicatorOptions }
     };
   },
+  components: {
+    gallery: VueGallery
+  },
   methods: {
-    clickMethod() {
-      VueEasyLightbox.imgs = pictures[id].image;
-      VueEasyLightbox.index = pictures[id].id; // index of imgList
-      VueEasyLightbox.show();
-    },
-    show() {
-      VueEasyLightbox.visible = true;
-    },
-    handleHide() {
-      VueEasyLightbox.visible = false;
+    removeImage: function(imageIndex){
+      this.index = imageIndex;
+      const url = this.images[this.index];
+      URL.revokeObjectURL(url);
+      this.images.splice(this.index, 1);
     }
   }
 };
 </script>
 
 <style scoped>
-.thumbnail {
-  display: flex;
-}
-.thumbnail img {
-  width: 168px;
+.image {
+  float: left;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
 }
 
-.thumbnail-info {
-  margin-left: 20px;
+.image:hover {
+  opacity:0.7;
 }
 
-.thumbnail h3 {
+button{
+  opacity:0.3;
+  float: right;
+  margin: 2px;
+  overflow: visible;
+  width: 24px;
+  height: 24px;
+  text-align: left;
+  color: black;
   font-size: 16px;
+  font-weight: 900;
+  border-color: black;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background-color: transparent;
 }
 
-h3,
-p {
-  margin: 0;
-  padding: 0;
+.image:hover button{
+  opacity: 0.9;
 }
 
-.video-player {
+.image:hover button{
+  display: block;
+  cursor: pointer;
+
+}
+
+/*.blueimp-gallery-display {
   display: flex;
-  width: 1200px;
-  margin: auto;
+  justify-content: center;
+  width: 1000px;
+  height: 800px;
+  margin-left: 300px;
+  margin-top: 200px;
 }
 
-.video-container {
-  margin-right: 40px;
+.blueimp-gallery > .slides {
+  display: flex;
+  flex: 1;
+  top: 30px;
+  left: 15px;
+  margin-right: 300px;
+  width: 500px;
+  color: #fff;
+  display: none;
 }
+
+.blueimp-gallery > .slides > .slide {
+  position: inherit;
+  height: 70%;
+}
+
+.blueimp-gallery > .description {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  color: #fff;
+  display: none;
+}
+.blueimp-gallery-controls > .description {
+  display: block;
+}*/
 </style>

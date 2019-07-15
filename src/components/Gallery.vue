@@ -1,37 +1,39 @@
 <template>
-  <!-- delete this component -->
   <div>
-    <b-card no-body>
-      <b-tabs card>
-        <b-tab title="Picture" active>
-          <!-- 여기에 picture list -->
-          <PicturePopup3></PicturePopup3>
-        </b-tab>
-        <b-tab title="Video">
-          <!-- 여기에 video list -->
-          <VideoPlayer></VideoPlayer>
-        </b-tab>
-      </b-tabs>
-    </b-card>
+    <vue-tabs active-tab-color="white" active-text-color="#FF82A3">
+      <v-tab title="Pictures" icon="ti-user">
+        <PicturePopup></PicturePopup>
+      </v-tab>
+
+      <v-tab title="Videos">
+        <VideoPopup></VideoPopup>
+      </v-tab>
+    </vue-tabs>
   </div>
 </template>
 
 <script>
-import VideoPlayer from "./VideoPlayer";
+
+import { VueTabs, VTab } from "vue-nav-tabs";
+import "vue-nav-tabs/themes/vue-tabs.css";
+
 import PicturePopup from "./PicturePopup";
-import PicturePopup2 from "./PicturePopup2";
-import PicturePopup3 from "./PicturePopup3";
-import VideoPopup2 from "./VideoPopup2";
+import VideoPopup from "./VideoPopup";
+
 export default {
   name: "Gallery",
   components: {
-    VideoPlayer,
+    VueTabs,
+    VTab,
     PicturePopup,
-    PicturePopup2,
-    PicturePopup3,
-    VideoPopup2
+    VideoPopup,
   }
 };
 </script>
 
-<style scoped></style>
+<style>
+.vue-tabs .nav > li span.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
