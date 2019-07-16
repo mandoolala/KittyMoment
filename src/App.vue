@@ -77,49 +77,51 @@
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
-              <!--<div class="swiper-container swiper-container-horizontal">
+              <<!--div class="swiper-container swiper-container-horizontal">
                 <div
                   class="swiper-wrapper"
-                  style="transition-duration: 0ms; transform: translate3d(-2040px, 0px, 0px);"
+                  style="transition-duration: 0ms; transform: translate3d(-4080px, 0px, 0px);"
                 >
                   <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2F15-Jul-2019%2003%3A03%20AM?alt=media&token=263d1133-017e-4db2-bc75-ded381ad66a0"   style="vertical-align: inherit;"/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2F13-Jul-2019%2011.38%20PM.png?alt=media&token=db8aadc3-1359-48af-84cb-9b0b291a7e75"   style="vertical-align: inherit;"/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2F16-Jul-2019%2007%3A35%20AM?alt=media&token=e82a335b-bd25-49a8-b36c-2485867ef4ff"   style="vertical-align: inherit;"/>
                   </div>
                   <div
                     class="swiper-slide swiper-slide-prev"
                     style="width: 1020px;"
                   >
-                    <img/>
+                    <p style="vertical-align: inherit;"
+                    ></p>
                   </div>
                   <div
                     class="swiper-slide swiper-slide-active"
                     style="width: 1020px;"
                   >
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_9.jpg?alt=media&token=40441a61-2d94-4ad6-93d9-4f4b2a5c3cb9"   style="vertical-align: inherit;"/>
                   </div>
                   <div
                     class="swiper-slide swiper-slide-next"
                     style="width: 1020px;"
                   >
-                    <img/>
+                    <p style="vertical-align: inherit;"
+                      ></p>
                   </div>
                   <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_8.jpg?alt=media&token=643df693-dc69-4ffb-8b15-16b8d9a0a02d"   style="vertical-align: inherit;"/>
                   </div>
                   <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_10.jpg?alt=media&token=7c6620b1-3b0e-4abb-9735-753b829b7f42"   style="vertical-align: inherit;"/>
                   </div>
                   <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_15.jpg?alt=media&token=b8cc6e12-2fe2-4a49-af1d-55d9f65cc056"   style="vertical-align: inherit;"/>
                   </div>
                   <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
-                  </div>
-                  <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
-                  </div>
-                  <div class="swiper-slide" style="width: 1020px;">
-                    <img/>
+                    <img class="popupimage" src="https://firebasestorage.googleapis.com/v0/b/kittymoments.appspot.com/o/images%2Fimage_14.jpg?alt=media&token=70f282ac-15d7-49f4-8b18-e63444befa17"   style="vertical-align: inherit;"/>
                   </div>
                 </div>
                 <div class="swiper-button-prev"></div>
@@ -500,7 +502,7 @@ h1 {
   font-weight: bold;
 }
 
-.swiper-slide swiper-slide-active{
+.swiper-slide swiper-slide-active {
   width: 650px;
   height: 650px;
 }
@@ -621,10 +623,13 @@ b-button {
   font-weight: bold;
 }
 
-.popupimage{
-  width:650px;
-  height:480px;
-
+.popupimage {
+  width: 650px;
+  height: 480px;
+  margin-top: 100px;
+  margin-bottom: 200px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .pageFooter {
   /*background-color: peachpuff;*/
