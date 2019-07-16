@@ -6,6 +6,7 @@
         <a @click="item.showModal = true">
           <video
             class="img-fluid z-depth-1"
+            style="width: 340px;"
             v-bind:src="item.dataURL"
             alt="video"
             data-toggle="modal"
@@ -83,13 +84,34 @@ export default {
 @media (min-width: 768px) {
   .carousel-multi-item-2 .col-md-3 {
     float: left;
-    width: 25%;
-    max-width: 100%;
+    width: 240px;
+    height: 180px;
+    margin-left: 200px;
   }
 }
 
 .carousel-multi-item-2 .card img {
   border-radius: 2px;
+}
+
+#showmodal{
+  float: right;
+  margin: 2px;
+  overflow: visible;
+  width: 70px;
+  height: 70px;
+  text-align: left;
+  color: black;
+  font-size: 16px;
+  font-weight: 900;
+  border-color: black;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  background-color: transparent;
+}
+
+video:hover{
+  opacity:0.7;
+  cursor:pointer;
 }
 
 figure {

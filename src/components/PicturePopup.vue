@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gallery :images="images" :index="index" :options="options" @close="index = null"></gallery>
+    <gallery :images="imagePopup" :index="index" :options="options" @close="index = null"></gallery>
     <div
       class="image"
       v-for="(image, imageIndex) in images"
@@ -19,6 +19,7 @@
 
 <script>
 import VueGallery from "vue-gallery";
+
 
 
 const indicatorOptions = {
@@ -42,7 +43,10 @@ export default {
   name: "PicturePopup",
   props: ["images"],
   data: function() {
+    let imagePopup = [];
+    imagePopup = this.images.forEach(image => imagePopup.push({image: image.dataURL}));
     return {
+      imagePopup: imagePopup,
       index: null,
       options: { ...fullscreenOptions, ...indicatorOptions }
     };

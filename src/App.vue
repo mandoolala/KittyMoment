@@ -11,7 +11,7 @@
             id="video"
             ref="video"
             crossorigin="anonymous"
-            src="http://1.246.1.243:9000/stream/video.mjpeg"
+            src="http://192.168.25.3:9000/stream/video.mjpeg"
           />
           <canvas
             ref="canvas"
@@ -58,7 +58,75 @@
           </div>
         </div>
         <div class="pageRightPanel">
-          <h2>Gallery</h2>
+          <div style="display:flex; flex-direction:row;">
+            <h2>Gallery</h2>
+            <b-button
+              id="slideshow"
+              variant="danger"
+              v-b-modal.modal-lg.modal-center
+              ><img v-bind:src="require('./assets/caraosel.png')" />Slide
+              View</b-button
+            >
+            <b-modal
+              id="modal-lg"
+              size="lg"
+              hide-footer="true"
+            >
+              <swiper :options="swiperOption">
+                <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><img src="slide.dataURL"></swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+              <!--<div class="swiper-container swiper-container-horizontal">
+                <div
+                  class="swiper-wrapper"
+                  style="transition-duration: 0ms; transform: translate3d(-2040px, 0px, 0px);"
+                >
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div
+                    class="swiper-slide swiper-slide-prev"
+                    style="width: 1020px;"
+                  >
+                    <img/>
+                  </div>
+                  <div
+                    class="swiper-slide swiper-slide-active"
+                    style="width: 1020px;"
+                  >
+                    <img/>
+                  </div>
+                  <div
+                    class="swiper-slide swiper-slide-next"
+                    style="width: 1020px;"
+                  >
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                  <div class="swiper-slide" style="width: 1020px;">
+                    <img/>
+                  </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+              </div>-->
+            </b-modal>
+          </div>
+
           <div>
             <vue-tabs active-tab-color="white" active-text-color="#FF82A3">
               <v-tab title="Pictures" icon="ti-user">
@@ -84,6 +152,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import { VueTabs, VTab } from "vue-nav-tabs";
 import "vue-nav-tabs/themes/vue-tabs.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 import PicturePopup from "./components/PicturePopup";
 import VideoPopup from "./components/VideoPopup";
@@ -114,11 +183,14 @@ let recordedBlobs;
 let timestamp;
 let RecordRef;
 let raf;
+
 export default {
   name: "App",
   components: {
     VueTabs,
     VTab,
+    swiper,
+    swiperSlide,
     PicturePopup,
     VideoPopup
   },
@@ -170,8 +242,13 @@ export default {
       onRecord: false,
 
       images: [],
-
-      videos: []
+      videos: [],
+      swiperOption: {
+        pagination: {
+          el: ".swiper-pagination"
+        }
+      },
+      swiperSlides: [1, 2, 3, 4, 5]
     };
   },
   methods: {
@@ -182,7 +259,7 @@ export default {
         contentType: "image/jpeg"
       };
 
-      fetch("http://1.246.1.243:9000/stream/snapshot.jpeg")
+      fetch("http://192.168.25.3:9000/stream/snapshot.jpeg")
         .then(res => res.blob()) // Gets the response and returns it as a blob
         .then(blob => {
           // Here's where you get access to the blob
@@ -495,7 +572,34 @@ h2 {
   font-weight: bolder;
 }
 
-#recordtime {
+b-button {
+  text-align: center;
+  margin-right: 100px;
+}
+
+#slideshow {
+  margin-top: 50px;
+  margin-left: 300px;
+}
+
+.btn {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.btn-danger {
+  background-color: #db9bc2;
+  height: 27px;
+  border-color: #db9bc2;
+  padding-bottom: 15px;
+}
+
+.btn-danger:hover {
+  background-color: #db9bc2;
+  border-color: #db9bc2;
+  opacity: 0.7;
 }
 
 .pageRightPanel {
