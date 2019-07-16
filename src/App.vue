@@ -11,7 +11,7 @@
             id="video"
             ref="video"
             crossorigin="anonymous"
-            src="http://192.168.25.3:9000/stream/video.mjpeg"
+            src="http://1.246.1.243:9000/stream/video.mjpeg"
           />
           <canvas
             ref="canvas"
@@ -67,14 +67,15 @@
               ><img v-bind:src="require('./assets/caraosel.png')" />Slide
               View</b-button
             >
-            <b-modal
-              id="modal-lg"
-              size="lg"
-              hide-footer="true"
-            >
+            <b-modal id="modal-lg" size="lg" hide-footer="true">
               <swiper :options="swiperOption">
-                <swiper-slide v-for="(slide, index) in swiperSlides" :key="index"><img src="slide.dataURL"></swiper-slide>
+                <swiper-slide v-for="(image, index) in images" :key="index"
+                  ><img class="popupimage" v-bind:src="image.dataURL"
+                /></swiper-slide>
                 <div class="swiper-pagination" slot="pagination"></div>
+
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
               </swiper>
               <!--<div class="swiper-container swiper-container-horizontal">
                 <div
@@ -247,8 +248,7 @@ export default {
         pagination: {
           el: ".swiper-pagination"
         }
-      },
-      swiperSlides: [1, 2, 3, 4, 5]
+      }
     };
   },
   methods: {
@@ -259,7 +259,7 @@ export default {
         contentType: "image/jpeg"
       };
 
-      fetch("http://192.168.25.3:9000/stream/snapshot.jpeg")
+      fetch("http://1.246.1.243:9000/stream/snapshot.jpeg")
         .then(res => res.blob()) // Gets the response and returns it as a blob
         .then(blob => {
           // Here's where you get access to the blob
@@ -500,6 +500,11 @@ h1 {
   font-weight: bold;
 }
 
+.swiper-slide swiper-slide-active{
+  width: 650px;
+  height: 650px;
+}
+
 .pageMain {
   display: flex;
   flex-direction: row;
@@ -616,6 +621,11 @@ b-button {
   font-weight: bold;
 }
 
+.popupimage{
+  width:650px;
+  height:480px;
+
+}
 .pageFooter {
   /*background-color: peachpuff;*/
 
