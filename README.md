@@ -4,8 +4,7 @@
 - User can capture images and record videos on screen
 - Moments are instantly displayed in Gallery on right Tab!
 
-![Preview](https://raw.githubusercontent.com/mandoolala/KittyMoments/master/web_screenshot.png)
-![Preview](https://raw.githubusercontent.com/mandoolala/KittyMoments/master/myraspberrypiathome.png)
+![Preview](https://raw.githubusercontent.com/mandoolala/KittyMoments/master/screenshot_and_pi.png)
 
 ## You need:
 
