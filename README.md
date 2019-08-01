@@ -1,7 +1,7 @@
 # KittyMoments
 ## 고양이 원격 관찰 앱
 
-- User can capture images and record videos on screen
+- User can capture images and record videos on screen <br />
 - Moments are instantly displayed in Gallery on right Tab!
 
 ![Preview](https://raw.githubusercontent.com/mandoolala/KittyMoments/master/screenshot_and_pi.png)
@@ -14,7 +14,7 @@ Jumper Cable/Breadboard/PIR Sensor (for auto-capture mode) <br />
 
 ## TODO
 
-Movement Detection using PIR sensor 
+Movement Detection using PIR sensor <br />
 upload using python flask server
 
 # Installation on Raspberry Pi
